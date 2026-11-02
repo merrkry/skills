@@ -1,0 +1,7 @@
+interface:
+  display_name: "Configure TypeScript Dev Commands"
+  short_description: "Standardize TypeScript repository development commands"
+  default_prompt: "Use $configure-typescript-dev-commands to configure and verify this repository’s development commands."
+
+policy:
+  allow_implicit_invocation: false

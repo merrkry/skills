@@ -43,4 +43,4 @@ Make full use of the ecosystem's existing libraries and tools instead of re-solv
 
 When adding a dependency, avoid poorly maintained packages or ones with almost no adoption.
 
-Add dependencies through the package manager so it resolves the latest eligible version that satisfies local minimum release age settings, e.g. `pnpm add` or `cargo add`.
+When creating a project or adding a dependency, toolchain, or runtime, use the latest version local settings allow, resolved by the package manager or found by a web search, never from memory, which is likely outdated.

@@ -21,7 +21,9 @@ Test from the outermost level where the behavior is still simple to observe and 
 
 Don't test that a dependency works. Test how this project uses it. If unsure how a dependency behaves, read its source or types instead of writing a test.
 
-Keep a test that is the only guard of a contract other code depends on, such as a public API, file format, config, migration, storage, or security rule, even if it looks like it checks implementation. Slow or static is not a reason to delete it.
+Keep a test that is the only guard of a contract other code depends on, such as a public API, file format, config, migration, storage, or security rule, even if it looks like it checks implementation. Slow or static is not a reason to delete it; make a slow one faster instead.
+
+Test a mechanism, not the values it runs with, such as limits, timeouts, or delays. A test that repeats such a value only writes it a second time. Drive the mechanism with values the test picks, and replace the real clock with a fake one instead of sleeping.
 
 Prefer adding a case to an existing test over writing a near-copy.
 

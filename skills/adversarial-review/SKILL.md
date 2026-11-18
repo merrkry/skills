@@ -23,7 +23,7 @@ Start it with `delegate_task`, and wait until it completes:
 {
   "target": {
     "providerInstanceId": "codex",
-    "model": "gpt-6.1-sol",
+    "model": "gpt-6.2-sol",
     "options": { "reasoningEffort": "high", "serviceTier": "default" }
   },
   "isolation": "shared",

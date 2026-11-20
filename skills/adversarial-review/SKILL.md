@@ -11,13 +11,13 @@ This skill serves two roles. If you were asked to conduct a round as the reviewe
 
 ## Loop
 
-Start a new reviewer for every round, so the history of earlier rounds can't sway the review. Handle its findings per `/handle-automated-review`, then verify the fixes before the next round. Trust that the reviewer's reported commands and outputs occurred as stated instead of rerunning expensive checks just to verify the report, but don't trust its analysis, conclusions, or proposed fixes. Record each handled finding in a scratch file outside the repository as you go, and build the report from it.
+Start a new reviewer for every round, so the history of earlier rounds can't sway the review. Handle its findings per `/handle-automated-review`, then verify the fixes before the next round. Trust that the reviewer's reported commands and outputs occurred as stated instead of rerunning expensive checks just to verify the report, but don't trust its analysis, conclusions, or proposed fixes. Record each handled finding, with the round that raised it, in a scratch file outside the repository as you go, and build the report from it.
 
 Commit the work before each round, so the reviewer's edits show up as their own diff. Treat those edits as evidence, not finished code: rework a reproduction into its long-term form when the fix needs it, e.g. a regression test that fits the suite per `/test-audit`, and revert the rest.
 
 ### Reviewer
 
-Start it with `delegate_task`, and wait until it completes:
+Start it with `delegate_task`, titled with the round number, and wait until it completes:
 
 ```json
 {
@@ -26,6 +26,7 @@ Start it with `delegate_task`, and wait until it completes:
     "model": "gpt-6.2-sol",
     "options": { "reasoningEffort": "high", "serviceTier": "default" }
   },
+  "title": "Adversarial Review Round 1",
   "isolation": "shared",
   "mode": "wait"
 }
@@ -57,15 +58,15 @@ Stop after handling the latest round's findings when either:
 
 ## Report
 
-Report why the loop stopped and how many rounds ran, then every finding on one line each, as `Aspect / summary: outcome, what you did`, with the outcomes of `/handle-automated-review`. E.g.:
+Report why the loop stopped and how many rounds ran, then every finding on one line each, as `Round N / aspect / summary: outcome, what you did`, with N the round that raised it and the outcome from `/handle-automated-review`. E.g.:
 
 ```
 Settled after 3 rounds: round 3 reported no findings.
 
-- Correctness / `import` overwrites existing rows when two files share an ID: different fix, keyed rows on (file, ID) instead of rejecting duplicate IDs; turned the reviewer's reproduction into a regression test.
-- Correctness / `--port` accepts 0: rejected, 0 asks the OS for a free port, which the test harness relies on; documented this in the flag's help text.
-- Quality / retry progress tracked in three booleans that drift apart: different fix, redesigned as a `RetryState` enum instead of syncing the flags.
-- Quality / `retry_count` also counts the first attempt: as suggested, renamed to `attempt_count`.
+- Round 1 / Correctness / `import` overwrites existing rows when two files share an ID: different fix, keyed rows on (file, ID) instead of rejecting duplicate IDs; turned the reviewer's reproduction into a regression test.
+- Round 1 / Correctness / `--port` accepts 0: rejected, 0 asks the OS for a free port, which the test harness relies on; documented this in the flag's help text.
+- Round 1 / Quality / retry progress tracked in three booleans that drift apart: different fix, redesigned as a `RetryState` enum instead of syncing the flags.
+- Round 2 / Quality / `retry_count` also counts the first attempt: as suggested, renamed to `attempt_count`.
 ```
 
 ## Reviewing

@@ -60,7 +60,7 @@ The change we propose in a plan or findings, or the change made in a report. Whe
 
 ### Blockers
 
-A blocker is where we still need a decision from the user. It has several viable options, and picking one is a tradeoff only the user can weigh. If one option is clearly better, it is an implementation detail, not a blocker. For each blocker, list the options and what each one costs.
+A blocker is where we still need a decision from the user. It has several viable options, and picking one is a product or preference tradeoff no experiment can settle. If an experiment or throwaway prototype can settle the choice (behavior, timing, output, performance), run it and recommend from what you observed instead of asking; if one option is clearly better, it is an implementation detail, not a blocker. For each blocker, list the options and what each one costs.
 
 ## Visualization
 

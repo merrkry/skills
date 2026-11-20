@@ -11,7 +11,7 @@ This skill serves two roles. If you were asked to conduct a round as the reviewe
 
 ## Loop
 
-Start a new reviewer for every round, so the history of earlier rounds can't sway the review. Handle its findings per `/handle-automated-review`, then verify the fixes before the next round. Record each handled finding in a scratch file outside the repository as you go, and build the report from it.
+Start a new reviewer for every round, so the history of earlier rounds can't sway the review. Handle its findings per `/handle-automated-review`, then verify the fixes before the next round. Trust that the reviewer's reported commands and outputs occurred as stated instead of rerunning expensive checks just to verify the report, but don't trust its analysis, conclusions, or proposed fixes. Record each handled finding in a scratch file outside the repository as you go, and build the report from it.
 
 Commit the work before each round, so the reviewer's edits show up as their own diff. Treat those edits as evidence, not finished code: rework a reproduction into its long-term form when the fix needs it, e.g. a regression test that fits the suite per `/test-audit`, and revert the rest.
 
@@ -73,14 +73,14 @@ Settled after 3 rounds: round 3 reported no findings.
 Review the change the brief describes against its goal, and reply with your findings.
 
 - Trust the reported check results instead of rerunning them, and run only what confirms a specific finding.
-- Reproduce a finding in code when that confirms it, e.g. with a failing test. You may edit any file for this, but must leave the problem itself unfixed. List the edits in the finding.
+- For correctness and performance findings, prove the failure with a run against the real code whenever feasible (e.g. a failing test, reproduction script, or command output showing the wrong behavior or measurement), and report the exact command and output. You may edit any file to reproduce it, but must leave the problem itself unfixed and list the edits in the finding. When a bug cannot be run directly, explain why and give a complete trigger path: the input or state, the steps, and the wrong result.
 - Cover aspects including, but not limited to:
   - Correctness: whether the change accurately achieves the original goal.
   - Performance.
-  - Quality: whether the code and docs are easy to understand, and whether the change is lean. `/principle-minimize-reader-load` and `/test-audit` set the bar. A change usually falls short of lean in one of two ways:
+  - Quality: whether the code and docs are easy to understand, and whether the change is lean. `/test-audit` sets the bar for tests. A change usually falls short of lean in one of two ways:
     - Unrelated edits: parts, including tests and docs, that could be reverted without changing what the change does.
     - Over-engineering: a simple problem solved in an overly complex way.
-- Give each bug a complete trigger path: the input or state, the steps, and the wrong result. Request no change for a hypothetical scenario that isn't shown to occur.
+- Request no change for a speculative risk that doesn't occur under the current code and setup, e.g. one that only matters after a future change or under a different deployment model.
 - Treat naming and doc quality problems as blocking like logic bugs, not as polish that can wait because the code works, e.g. inaccurate names, or verbose, unclear, or inconsistent docs.
 - Report only blocking findings, and leave out nitpicks and matters of taste. Every reported finding is blocking, so don't grade it with a severity, such as Major/Critical or P0/P1.
 - The count has no target: report none rather than pad with nitpicks, and report every blocking finding rather than only the most important few, since anything held back costs another round.

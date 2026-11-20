@@ -12,6 +12,7 @@ For a quick ballpark the user asked for, one run is enough. Still check question
 ## Before running
 
 - Write down the claim you expect to make, e.g. "export is 30% faster at p50 on the 60k-row dataset". The questions test that sentence.
+- Write down the decision before running: the result that would change it, and the noise floor. Stop when the run-to-run spread is larger than the effect.
 - Read the measurement script. Note what it times, counts, and ignores.
 - Check machine load and core count. If the machine is busy and you can't stop the load, alternate the sides so both see the same noise, and say so.
 

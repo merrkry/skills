@@ -9,7 +9,7 @@ Watch the PR and work through its CI failures and review comments in rounds. In 
 
 ## Watch
 
-If the work has no commit or PR yet, commit it and open a PR first.
+If the work has no commit yet, commit it first. Rebase onto the latest target branch once, and open a PR if none exists.
 
 Watch CI and comments with the tools available. Prefer an event-driven tool that wakes you on new checks or comments. Without one, poll every 250 seconds.
 

@@ -7,8 +7,6 @@ description: How to write documents that agents read and act on, such as skills,
 
 An agent reading the document should know what outcome is wanted, where to find what it needs, and how to tell when it is done. Assume the agent is a capable engineer who lacks only the project-specific context.
 
-Decide what content earns a place with `/principle-document-only-what-code-cannot-say`. This skill covers how to write it.
-
 ## Skill metadata
 
 A skill's `description` must have two parts: what the skill covers, and when to use it.
@@ -41,7 +39,7 @@ Each part must give the agent:
 
 - A project-level `AGENTS.md` may include a brief map of the repository's top-level layout, even though a search would reveal it: the file is injected automatically, so the map helps the agent start faster.
 - Treat a README as the introduction to its project or module. Put operational details, such as build, test, or deploy steps, in `AGENTS.md`, CONTRIBUTING, or scripts.
-- In a prompt, such as a subagent brief, account for the `AGENTS.md` files and skills the recipient can access. Don't restate their guidance; name the skills the task needs and tell the recipient to load them.
+- In a prompt, such as a subagent brief, account for the `AGENTS.md` files and skills the recipient can access. Don't restate their guidance; name the skills the task needs and tell the recipient to load them. State the acceptance bar explicitly so the recipient doesn't add extra checks or review rounds above it.
 
 ## Requirement levels
 

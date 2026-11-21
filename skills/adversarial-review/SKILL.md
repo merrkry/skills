@@ -56,6 +56,8 @@ Stop after handling the latest round's findings when either:
 - the review settled: the latest round reported no findings, or you rejected all of them;
 - the round budget is spent: 3 rounds by default, or 5 when the change touches critical code, such as authentication or a storage format.
 
+When the round budget is spent without settling, the change hasn't met the quality bar. Without explicit prior authorization from the user to proceed or merge regardless of the review outcome, you must treat the work as blocked and stop rather than continuing.
+
 ## Report
 
 Report why the loop stopped and how many rounds ran, then every finding on one line each, as `Round N / aspect / summary: outcome, what you did`, with N the round that raised it and the outcome from `/handle-automated-review`. E.g.:
@@ -68,6 +70,11 @@ Settled after 3 rounds: round 3 reported no findings.
 - Round 1 / Quality / retry progress tracked in three booleans that drift apart: different fix, redesigned as a `RetryState` enum instead of syncing the flags.
 - Round 2 / Quality / `retry_count` also counts the first attempt: as suggested, renamed to `attempt_count`.
 ```
+
+When the round budget is spent without settling, the report must also cover:
+
+- **Where findings concentrated**: which parts of the change drew the most issues and need rework.
+- **Why it didn't settle, and alternatives to propose**: why the review kept finding problems, along with concrete options that step outside the current approach for the user to decide on, e.g. dropping a guarantee or feature behavior, or taking a different implementation path.
 
 ## Reviewing
 

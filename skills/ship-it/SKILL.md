@@ -9,7 +9,7 @@ Deliver the change autonomously. By default, carry it until its PR is squash-mer
 
 ## Review
 
-CI usually runs automated review on the PR. Run `/adversarial-review` before opening the PR only when the change is complex enough that it should already carry high confidence when pushed, e.g. a large effective diff or intricate lifecycle handling. If it spent its round budget while the last round still found problems worth fixing, the change hasn't reached the quality bar: stop and report, instead of continuing for the steps below.
+CI usually runs automated review on the PR. Run `/adversarial-review` before opening the PR only when the change is complex enough that it should already carry high confidence when pushed, e.g. a large effective diff or intricate lifecycle handling. If it stopped without settling, the change hasn't reached the quality bar: stop and report, instead of continuing for the steps below.
 
 ## PR
 

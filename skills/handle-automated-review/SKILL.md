@@ -25,9 +25,20 @@ Answer where the review lives, e.g. in the PR thread per `/babysit-pr`, or in th
 
 Treat the change under review as unfinished work: nothing requires keeping its current design or keeping the fix minimal. When a finding shows the design itself is wrong, go back to the original goal and redesign for the end state, even if that rewrites most of the change.
 
+Judge findings together as well as one by one, including those from earlier rounds of review on the same change: a design problem can show across findings that each look like a small bug with a small fix. The fixes aren't converging when:
+
+- findings land on one mechanism, or on code that the fix for an earlier finding added;
+- the change keeps growing as findings are handled.
+
+Further fixes to single findings won't settle such a change: its design promises something it can't deliver, or carries something the goal doesn't need. Go back to the goal and redesign, or remove the mechanism, feature, or guarantee the findings gather around.
+
 ## Make the code answer the next reviewer
 
-When a finding has no clear factual error, but you reject it or fix it differently for design reasons, the code likely fails to convey the design, and the next reader may misread it the same way. Besides answering, change the code so it conveys the design: make the intended structure visible in the code itself, state the background or tradeoff the code can't express, and delete leftovers that suggest a different design. Prefer code over prose. E.g. when a reviewer asks to validate input that is already validated at the boundary, carry that guarantee in a type rather than only replying.
+Your answer reaches only the reviewer that raised the finding. Every later reader, whether another reviewer or a maintainer, sees just the code and its docs, and will raise the same point unless they answer it.
+
+When a finding has no clear factual error, but you reject it or fix it differently for design reasons, the code likely fails to convey the design. Your answer must rest on something a reader can find: cite where the code or its docs already state the contract or tradeoff, or make the change that states it as part of handling the finding. To convey the design, make the intended structure visible in the code itself, state the background or tradeoff the code can't express, and delete leftovers that suggest a different design. Prefer code over prose. E.g. when a reviewer asks to validate input that is already validated at the boundary, carry that guarantee in a type rather than only replying.
+
+When a point you rejected comes back from a later review, the code still doesn't answer it. Don't answer it again by pointing at the earlier rejection, e.g. "rejected, as in round 5". Change the code where the misreading starts, and weigh the rejection again: two independent readers arrived at the same point.
 
 ## Pitfalls
 
